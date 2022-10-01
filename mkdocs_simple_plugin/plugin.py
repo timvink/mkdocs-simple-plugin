@@ -112,11 +112,13 @@ class SimplePlugin(BasePlugin):
         # searched for documentation
         ('include_folders', config_options.Type(list, default=['*'])),
         #
-        # ### ignore_folders
+        # ### ignore
         #
         # Directories whose name matches a glob pattern in this list will NOT be
         # searched for documentation.
-        ('ignore_folders', config_options.Type(list, default=[])),
+        # _(renamed from `ignore_folders`)_
+        ('ignore_folders', config_options.Deprecated(moved_to="ignore")),
+        ('ignore', config_options.Type(list, default=[])),
         #
         # ### ignore_hidden
         #
@@ -137,11 +139,13 @@ class SimplePlugin(BasePlugin):
         # Otherwise, the build docs directory will be a temporary directory.
         ('build_docs_dir', config_options.Type(str, default='')),
         #
-        # ### include_extensions
+        # ### copy
         #
         # Any file in the searched directories whose name contains a string in
         # this list will simply be copied to the generated documentation.
-        ('include_extensions',
+        # _(renamed from `include_extensions`)_
+        ('include_extensions', config_options.Deprecated(moved_to="copy")),
+        ('copy',
             config_options.Type(
                 list,
                 default=[
@@ -291,8 +295,8 @@ class SimplePlugin(BasePlugin):
         # Update the docs_dir with our temporary one
         config['docs_dir'] = build_docs_dir
         # Add all markdown extensions to include list
-        self.config['include_extensions'] = list(utils.markdown_extensions) + \
-            self.config['include_extensions']
+        self.config['copy'] = list(utils.markdown_extensions) + \
+            self.config['copy']
 
         # Always ignore the output paths
         self.config["ignore_paths"] = [

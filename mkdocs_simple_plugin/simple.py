@@ -43,8 +43,8 @@ class Simple():
             self,
             build_docs_dir: str,
             include_folders: list,
-            include_extensions: list,
-            ignore_folders: list,
+            copy: list,
+            ignore: list,
             ignore_hidden: bool,
             ignore_paths: list,
             semiliterate: dict,
@@ -54,9 +54,8 @@ class Simple():
         Args:
             build_docs_dir (str): Output directory for processed files
             include_folders (list): Glob of folders to search for files
-            include_extensions (list): Glob of filenames to copy directly to
-                output
-            ignore_folders (list): Glob of paths to exclude
+            copy (list): Glob of filenames to copy directly to output
+            ignore (list): Glob of paths to exclude
             ignore_hidden (bool): Whether to ignore hidden files for processing
             ignore_paths (list): Absolute filepaths to exclude
             semiliterate (dict): Settings for processing file content in
@@ -65,8 +64,8 @@ class Simple():
         """
         self.build_dir = build_docs_dir
         self.include_folders = set(include_folders)
-        self.copy_glob = set(include_extensions)
-        self.ignore_glob = set(ignore_folders)
+        self.copy_glob = set(copy)
+        self.ignore_glob = set(ignore)
         self.ignore_hidden = ignore_hidden
         self.hidden_prefix = set([".", "__"])
         self.ignore_paths = set(ignore_paths)

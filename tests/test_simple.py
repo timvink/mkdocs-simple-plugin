@@ -31,9 +31,9 @@ class TestSimple(TestCase):
         self.default_settings = {
             "build_docs_dir": "/build_dir/",
             "include_folders": ["*"],
-            "ignore_folders": [],
+            "ignore": [],
             "ignore_hidden": True,
-            "include_extensions": [".md"],
+            "copy": [".md"],
             "ignore_paths": [],
             "semiliterate": {}
         }
@@ -84,7 +84,7 @@ class TestSimple(TestCase):
 
     def test_ignored_config(self):
         """Test ignored files from config."""
-        self.default_settings["ignore_folders"] = ["test/*"]
+        self.default_settings["ignore"] = ["test/*"]
         simple_test = simple.Simple(**self.default_settings)
         self.fs.create_file("directory/test.md")
         self.assertFalse(
